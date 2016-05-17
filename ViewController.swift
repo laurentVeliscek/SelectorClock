@@ -16,17 +16,16 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-
         // Let's instanciate a clock
         // at Tempo 120, that will trig every sixteenth note
-        var myClock = SelectorClock(tempo: 120, division: 16)
+        var myClock = SelectorClock(tempo: 40, division: 4)
 
 
         // We define a function to be triggered
         func aFunction(){
-            print ("myClock -> tick!! \(myClock.currentTick) at  \(myClock.sequence.currentTime)")
-
+             print ("myClock -> tick!! \(myClock.currentTick) at  \(myClock.sequence.currentTime)")
         }
+
 
         // We attach this function to the clock
         myClock.addClient(aFunction)

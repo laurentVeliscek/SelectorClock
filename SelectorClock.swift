@@ -43,17 +43,19 @@ class SelectorClock{
         clicker?.clickPitch = 60
         clicker?.clickVolume = 0.1
 
-
+        // We build the track that will act as a metronome
         let clickTrack = seq.newTrack()
         for i in 0 ..< (division)  {
             clickTrack?.addNote(60, velocity: 100, position: Double(i ) / Double(division) , duration: Double(1.0 / Double(division)))
         }
 
+        // Our clickTrack is targeted to our clicker instrument
         clickTrack?.setMIDIOutput((clicker?.midiIn)!)
         clickTrack?.setLoopInfo(1.0, numberOfLoops: 0)
         seq.setBPM(bpm)
     }
 
+    // Play from beginning
     func start()
     {
         seq.rewind()
@@ -61,11 +63,13 @@ class SelectorClock{
         seq.play()
     }
 
+    // Pause without rewind
     func pause()
     {
         seq.stop()
     }
 
+    // Stop and rewind
     func stop()
     {
         seq.stop()
@@ -73,16 +77,28 @@ class SelectorClock{
         clicker?.reset()
     }
 
+    // Continue without rewind
     func play()
     {
         seq.play()
     }
 
+    // Here you hook any function to be triggered
     func addClient(f: Void -> Void){
         clicker?.addClient(f)
     }
 
-    // Default is Zero !
+    // Default is true
+    var silent:Bool{
+        get{
+            return (clicker?.silent)!
+        }
+        set{
+            clicker?.silent = newValue
+        }
+    }
+
+    // Sets click volume when .silent is false
     var volume:Double{
         get{
             return (clicker?.clickVolume)!
@@ -92,7 +108,7 @@ class SelectorClock{
 
         }
     }
-    // Midi Note Pitch (from 20 to 120)
+    // Midi Note Pitch of the click (from 20 to 120)
     var pitch:Int{
         get{
             return (clicker?.clickPitch)!
@@ -102,19 +118,14 @@ class SelectorClock{
 
         }
     }
-
+    // Return the current Tick number ( = how many times we have triggered...)
     var currentTick: Int{
         get{
             return (clicker?.tickNumber)!
         }
     }
 
-    var sequence:AKSequencer{
-        get{
-            return seq
-        }
-    }
-
+    // You can adjust Tempo in real time
     var tempo:Double{
         get{
             return self.bpm
@@ -124,14 +135,15 @@ class SelectorClock{
         }
     }
 
-    var silent:Bool{
+
+    // You can access the internal sequence freely to add tracks and events like any AKSequencer
+    var sequence:AKSequencer{
         get{
-            return (clicker?.silent)!
-        }
-        set{
-            clicker?.silent = newValue
+            return seq
         }
     }
-    
+
+
+
     
 }
