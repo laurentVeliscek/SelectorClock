@@ -1,9 +1,8 @@
 //
 //  ViewController.swift
-//  labo2
 //
-//  Created by bubu from bubuland on 04/05/2016.
-//  Copyright © 2016 bubuland. All rights reserved.
+//  Created by Laurent Veliscek on 04/05/2016.
+//  Copyright © 2016 Laurent Veliscek. All rights reserved.
 //
 
 import UIKit
