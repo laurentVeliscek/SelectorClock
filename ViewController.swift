@@ -18,7 +18,7 @@ class ViewController: UIViewController {
 
         // Let's instanciate a clock
         // at Tempo 120, that will trig every sixteenth note
-        var myClock = SelectorClock(tempo: 40, division: 4)
+        var myClock = SelectorClock(tempo: 120, division: 4)
 
 
         // We define a function to be triggered
@@ -34,7 +34,7 @@ class ViewController: UIViewController {
         myClock.silent = false
 
         // We can adjust the click pitch
-        myClock.pitch = 80
+        myClock.pitch = 40
 
         // and the click volume
         myClock.volume = 0.1
