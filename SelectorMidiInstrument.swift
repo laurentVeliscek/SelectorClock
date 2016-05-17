@@ -2,7 +2,7 @@
 //  SelectorMidiInstrument.swift
 //
 //
-//  Created by bubu from bubuland on 17/05/2016.
+//  Created by Laurent Veliscek on 17/05/2016.
 //  Copyright © 2016 Laurent Veliscek. All rights reserved.
 //
 
