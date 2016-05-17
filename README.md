@@ -8,4 +8,9 @@ SelectorClock.swift instanciates a SelectorMidiInstrument slaved by a sequencer.
 
 So you can very easily hook any function to be triggered at regular intervals.
 
+I posted an example of ViewController that uses SelectorClock.
+
+I tried to document my code so it should be very easy to tweak to fit your needs.
+
+:-)
 
