@@ -19,12 +19,13 @@ class ViewController: UIViewController {
 
         // Let's instanciate a clock
         // at Tempo 120, that will trig every sixteenth note
-        var myClock = SelectorClock(tempo: 120, division: 4)
+        var myClock = SelectorClock(tempo: 120, division: 16)
 
 
         // We define a function to be triggered
         func aFunction(){
-            print ("myClock -> tick!! \(myClock.currentTick)")
+            print ("myClock -> tick!! \(myClock.currentTick) at  \(myClock.sequence.currentTime)")
+
         }
 
         // We attach this function to the clock
@@ -34,14 +35,14 @@ class ViewController: UIViewController {
         myClock.silent = false
 
         // We can adjust the click pitch
-        myClock.pitch = 110
+        myClock.pitch = 80
 
         // and the click volume
-        myClock.volume = 0.3
+        myClock.volume = 0.1
 
         // We must link the clock's output to AudioKit (even if we don't need the sound)
         AudioKit.output = myClock.output
-        
+
         AudioKit.start()
 
         // Then We can start the clock !
@@ -55,8 +56,8 @@ class ViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-
-
+    
+    
+    
 }
 

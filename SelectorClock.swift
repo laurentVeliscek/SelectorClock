@@ -29,7 +29,7 @@ class SelectorClock{
     private var seq = AKSequencer()
     private var clicker:SelectorMidiInstrument?
     private var bpm:Double
-   
+
     var output:AKNode?
 
     init(tempo: Double = 120, division: Int = 4)
@@ -38,19 +38,19 @@ class SelectorClock{
         clicker = SelectorMidiInstrument()
         output = clicker
 
+
         clicker?.enableMIDI(midi.midiClient, name: "clicker midi in")
         clicker?.clickPitch = 60
         clicker?.clickVolume = 0.1
 
 
         let clickTrack = seq.newTrack()
-        for i in 0 ..< division  {
-            clickTrack?.addNote(60, velocity: 100, position: Double(i) / Double(division) , duration: Double(1.0 / Double(division)))
+        for i in 0 ..< (division)  {
+            clickTrack?.addNote(60, velocity: 100, position: Double(i ) / Double(division) , duration: Double(1.0 / Double(division)))
         }
 
         clickTrack?.setMIDIOutput((clicker?.midiIn)!)
-        seq.setLength(1.0)
-        seq.loopOn()
+        clickTrack?.setLoopInfo(1.0, numberOfLoops: 0)
         seq.setBPM(bpm)
     }
 
@@ -126,7 +126,7 @@ class SelectorClock{
 
     var silent:Bool{
         get{
-             return (clicker?.silent)!
+            return (clicker?.silent)!
         }
         set{
             clicker?.silent = newValue
