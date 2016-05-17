@@ -29,19 +29,19 @@ class ViewController: UIViewController {
         }
 
         // We attach this function to the clock
-        myClock?.addClient(aFunction)
+        myClock.addClient(aFunction)
 
         // For debug purpose, we'll make our clock make some noise
-        myClock?.silent = false
+        myClock.silent = false
 
         // We can adjust the click pitch
-        myClock?.pitch = 110
+        myClock.pitch = 110
 
         // and the click volume
-        myClock?.volume = 0.3
+        myClock.volume = 0.3
 
         // We must link the clock's output to AudioKit (even if we don't need the sound)
-        AudioKit.output = myClock?.output
+        AudioKit.output = myClock.output
         
         AudioKit.start()
 
