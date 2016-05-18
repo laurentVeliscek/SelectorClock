@@ -29,6 +29,9 @@ class SelectorClock{
     private var seq = AKSequencer()
     private var clicker:SelectorMidiInstrument?
     private var bpm:Double
+    private var _isRunning = false
+    private var _loopLength = 4000
+
 
     var output:AKNode?
 
@@ -45,13 +48,13 @@ class SelectorClock{
 
         // We build the track that will act as a metronome
         let clickTrack = seq.newTrack()
-        for i in 0 ..< (division)  {
+        for i in 0 ..< (division * _loopLength)  {
             clickTrack?.addNote(60, velocity: 100, position: Double(i ) / Double(division) , duration: Double(1.0 / Double(division)))
         }
 
         // Our clickTrack is targeted to our clicker instrument
         clickTrack?.setMIDIOutput((clicker?.midiIn)!)
-        clickTrack?.setLoopInfo(1.0, numberOfLoops: 0)
+        clickTrack?.setLoopInfo(Double(_loopLength), numberOfLoops: 0)
         seq.setBPM(bpm)
     }
 
@@ -61,12 +64,14 @@ class SelectorClock{
         seq.rewind()
         clicker?.reset()
         seq.play()
+        _isRunning = true
     }
 
     // Pause without rewind
     func pause()
     {
         seq.stop()
+        _isRunning = false
     }
 
     // Stop and rewind
@@ -75,12 +80,14 @@ class SelectorClock{
         seq.stop()
         seq.rewind()
         clicker?.reset()
+         _isRunning = false
     }
 
     // Continue without rewind
     func play()
     {
         seq.play()
+        _isRunning = true
     }
 
     // Here you hook any function to be triggered
@@ -124,6 +131,14 @@ class SelectorClock{
             return (clicker?.tickNumber)!
         }
     }
+
+    // Return the current Tick number ( = how many times we have triggered...)
+    var isRunning: Bool{
+        get{
+            return _isRunning
+        }
+    }
+
 
     // You can adjust Tempo in real time
     var tempo:Double{

@@ -86,11 +86,12 @@ class SelectorMidiInstrument: AKMIDIInstrument{
     // will trig any functions attached using addClient method
     private func trigClients()
     {
-        _tickNumber += 1
-        for c in _clients
+               for c in _clients
         {
             c()
         }
+        _tickNumber += 1
+
     }
 
 
